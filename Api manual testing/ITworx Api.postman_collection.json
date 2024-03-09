@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "e59b5280-fe1f-45c5-a839-c24761ed9543",
+		"name": "ITworx Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5196939"
+	},
+	"item": [
+		{
+			"name": "Valid City Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test the API with a valid city name and verify that it returns a successful response with the correct weather information.\r",
+							"//Verify that the API returns a 200 OK response.\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Verify that the response body contains the expected weather information for the specified city.\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_display\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/api/weather/London",
+					"path": [
+						"api",
+						"weather",
+						"London"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid City Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test the API with an invalid city name and verify that it returns a 404 Not Found error.\r",
+							"//Verify that the API returns a 404 Not Found response.\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"//Verify that the response body contains an error message indicating that the city name is invalid.\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_display\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/api/weather/xyzzzzz",
+					"path": [
+						"api",
+						"weather",
+						"xyzzzzz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Missing City Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Test the API without providing a city name and verify that it returns a 400 Bad Request error.\r",
+							"//Verify that the API returns a 400 Bad Request response.\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"//Verify that the response body contains an error message indicating that the city name is required.\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_display\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "/api/weather/",
+					"path": [
+						"api",
+						"weather",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
